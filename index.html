@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mistrz Polszczyzny 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Top bar -->
+        <nav class="topbar">
+            <span class="logo">📝 Mistrz Polszczyzny</span>
+            <span class="counter" id="progress">1 / 15</span>
+        </nav>
+
+        <!-- Mode toggle -->
+        <div class="mode-bar">
+            <button class="mode-btn active" id="mode-all">Wszystkie</button>
+            <button class="mode-btn" id="mode-errors">
+                Do powtórki <span class="badge" id="error-badge">0</span>
+            </button>
+        </div>
+
+        <!-- Flashcard -->
+        <div class="card-wrapper" id="card-wrapper">
+            <div class="card" id="flashcard">
+                <div class="card-face front">
+                    <span class="tag" id="card-category"></span>
+                    <p class="question" id="card-question"></p>
+                    <span class="tap-hint">dotknij, aby odkryć</span>
+                </div>
+                <div class="card-face back">
+                    <p class="answer" id="card-answer"></p>
+                    <div class="rule" id="card-rule"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons (visible after flip) -->
+        <div class="actions hidden" id="actions">
+            <button class="action-btn know" id="btn-know">✓ Umiem</button>
+            <button class="action-btn dont-know" id="btn-dont-know">✗ Powtórzę</button>
+        </div>
+
+        <!-- Bottom controls -->
+        <div class="bottom-bar">
+            <button class="link-btn" id="btn-reset">Resetuj postępy</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
