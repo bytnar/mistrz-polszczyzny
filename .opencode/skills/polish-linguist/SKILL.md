@@ -32,7 +32,6 @@ Unified skill for working on the Mistrz Polszczyzny flashcard application. Cover
 | `style.css`             | Styles, dark mode, responsiveness             | Yes       |
 | `script.js`             | App logic, state, LocalStorage                | Yes       |
 | `data.js`               | Flashcard database (400 cards)                | Yes       |
-| `generate_full_data.py` | Legacy build script (not used in current workflow) | Yes  |
 
 ---
 
@@ -68,8 +67,6 @@ python3 -m http.server 8000
 - Semantic HTML5, 4-space indent, double-quoted attributes
 - Buttons must have readable text or `aria-label`
 
-### Python (`generate_full_data.py`)
-- PEP 8, 4-space indent, `encoding='utf-8'` on all file ops, f-strings
 
 ---
 

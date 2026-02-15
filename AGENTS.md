@@ -11,7 +11,6 @@ This document provides essential information for AI agents and developers workin
 - `style.css`: All styles, including dark mode and responsiveness.
 - `script.js`: Application logic, state management, and LocalStorage handling.
 - `data.js`: Database of flashcards (400 cards). Edit directly.
-- `generate_full_data.py`: Legacy build script (not used in current workflow).
 
 ---
 
@@ -42,8 +41,7 @@ node -e "console.log(require('./data.js').length)"
   - Test "Resetuj postępy" button.
 - **Linting:**
   - JS: No linter configured. Use standard ES6+ best practices.
-  - Python: Follow PEP 8.
-  - HTML/CSS: Ensure valid syntax and proper nesting.
+- Python: Follow PEP 8.
 
 ---
 
