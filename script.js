@@ -1,5 +1,6 @@
 // ===== State =====
 const STORAGE_KEY = 'mistrz_errors';
+const STATE_KEY = 'mistrz_state';
 let currentIndex = 0;
 let reviewMode = false;
 let currentDeck = [];
@@ -35,6 +36,15 @@ function saveErrors() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(errorIds));
 }
 
+function saveState() {
+    const state = {
+        index: currentIndex,
+        mode: reviewMode ? 'review' : 'all',
+        deckIds: currentDeck.map(c => c.id)
+    };
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+}
+
 function updateBadge() {
     errorBadge.textContent = errorIds.length;
     errorBadge.classList.toggle('empty', errorIds.length === 0);
@@ -54,6 +64,7 @@ function showCard() {
 
     if (currentDeck.length === 0) {
         showEmpty();
+        saveState();
         return;
     }
 
@@ -72,6 +83,7 @@ function showCard() {
     }, 150);
 
     updateProgress();
+    saveState();
 }
 
 function showEmpty() {
@@ -117,6 +129,46 @@ function startReviewMode() {
 function nextCard() {
     currentIndex++;
     showCard();
+}
+
+// ===== Restore saved session =====
+function restoreSession() {
+    try {
+        const raw = localStorage.getItem(STATE_KEY);
+        if (!raw) return false;
+
+        const state = JSON.parse(raw);
+        if (!state || !Array.isArray(state.deckIds) || state.deckIds.length === 0) return false;
+
+        // Rebuild deck from saved ID order
+        const idMap = new Map(flashcards.map(c => [c.id, c]));
+        const restoredDeck = state.deckIds
+            .map(id => idMap.get(id))
+            .filter(Boolean);
+
+        if (restoredDeck.length === 0) return false;
+
+        // In review mode, filter out cards that were un-marked since last session
+        if (state.mode === 'review') {
+            const stillMarked = restoredDeck.filter(c => errorIds.includes(c.id));
+            if (stillMarked.length === 0) return false;
+            currentDeck = stillMarked;
+            reviewMode = true;
+            modeErrors.classList.add('active');
+            modeAll.classList.remove('active');
+        } else {
+            currentDeck = restoredDeck;
+            reviewMode = false;
+            modeAll.classList.add('active');
+            modeErrors.classList.remove('active');
+        }
+
+        currentIndex = Math.min(state.index || 0, currentDeck.length - 1);
+        showCard();
+        return true;
+    } catch (e) {
+        return false;
+    }
 }
 
 // ===== Event Handlers =====
@@ -166,4 +218,6 @@ btnReset.addEventListener('click', () => {
 
 // ===== Init =====
 updateBadge();
-startAllMode();
+if (!restoreSession()) {
+    startAllMode();
+}
