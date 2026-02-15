@@ -398,7 +398,22 @@ const flashcards = [
     { id: 397, category: "Interpunkcja", front: "Zdanie: Lubię lody ___ albo gofry.", back: "Lubię lody albo gofry.", rule: "Nie stawiamy przecinka przed 'albo' (współrzędność)." },
     { id: 398, category: "Poprawność językowa", front: "Forma: Wziąć czy Wziąść?", back: "Wziąć", rule: "Poprawna forma to wziąć." },
     { id: 399, category: "Poprawność językowa", front: "Forma: W dniu dzisiejszym czy Dzisiaj?", back: "Dzisiaj", rule: "Unikamy formy 'w dniu dzisiejszym'." },
-    { id: 400, category: "Poprawność językowa", front: "Forma: Przekonywujący czy Przekonujący?", back: "Przekonujący", rule: "Poprawna forma to przekonujący." }
+    { id: 400, category: "Poprawność językowa", front: "Forma: Przekonywujący czy Przekonujący?", back: "Przekonujący", rule: "Poprawna forma to przekonujący." },
+    { id: 401, category: "Ortografia ó/u", front: "S___l", back: "Sól", rule: "Ó→O (sól→soli)." },
+    { id: 402, category: "Ortografia ó/u", front: "Wi___zł", back: "Wiózł", rule: "Ó→O (wiózł→wiozła)." },
+    { id: 403, category: "Ortografia ó/u", front: "Tr___d", back: "Trud", rule: "U - brak wymiany." },
+    { id: 404, category: "Ortografia ó/u", front: "Brz___ch", back: "Brzuch", rule: "U - brak wymiany." },
+    { id: 405, category: "Ortografia ó/u", front: "Og___ł", back: "Ogół", rule: "Ó→O (ogół→ogólny)." },
+    { id: 406, category: "Ortografia rz/ż", front: "Sp___edać", back: "Sprzedać", rule: "Po P→RZ." },
+    { id: 407, category: "Ortografia rz/ż", front: "G___yb", back: "Grzyb", rule: "Po G→RZ." },
+    { id: 408, category: "Ortografia rz/ż", front: "Leka___", back: "Lekarz", rule: "RZ w zakończeniu -arz." },
+    { id: 409, category: "Ortografia rz/ż", front: "Kału___a", back: "Kałuża", rule: "Ż po literze ł." },
+    { id: 410, category: "Ortografia rz/ż", front: "Wa___yć", back: "Ważyć", rule: "Ż→G (ważyć→waga)." },
+    { id: 411, category: "Ortografia ch/h", front: "___cieć", back: "Chcieć", rule: "CH - tradycyjna pisownia." },
+    { id: 412, category: "Ortografia ch/h", front: "___erb", back: "Herb", rule: "H w wyrazach obcych." },
+    { id: 413, category: "Ortografia ch/h", front: "Pia___", back: "Piach", rule: "CH na końcu." },
+    { id: 414, category: "Ortografia ch/h", front: "Wa___adło", back: "Wahadło", rule: "H niewymienne (zapamiętaj)." },
+    { id: 415, category: "Ortografia ch/h", front: "S___ab", back: "Schab", rule: "Po S→CH." }
 ];
 
 if (typeof module !== 'undefined') {
