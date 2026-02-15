@@ -30,10 +30,10 @@ chh_data = [
     ("_isteria", "Histeria", "H w wyrazach obcych."),
     ("_oryzont", "Horyzont", "H w wyrazach obcych."),
     ("_ipoteza", "Hipoteza", "H w wyrazach obcych."),
-    ("C_ory", "Chory", "CH wymienia się na SZ (chory → choroba)."),
+    ("C_ory", "Chory", "CH - tradycyjna pisownia."),
     ("C_leb", "Chleb", "CH - tradycyjna pisownia."),
     ("C_łopiec", "Chłopiec", "CH - tradycyjna pisownia."),
-    ("C_łodny", "Chłodny", "CH wymienia się na SZ (chłodny → chłód)."),
+    ("C_łodny", "Chłodny", "CH - tradycyjna pisownia."),
     ("C_mura", "Chmura", "CH - tradycyjna pisownia."),
     ("C_wila", "Chwila", "CH - tradycyjna pisownia."),
     ("C_wała", "Chwała", "CH - tradycyjna pisownia."),
@@ -149,15 +149,15 @@ for i, (front, back, rule) in enumerate(opow_data, start=281):
 # === WIELKA LITERA (10 cards) ===
 wielka_data = [
     ("uniwersytet / Uniwersytet Warszawski", "Uniwersytet Warszawski", "Nazwy własne instytucji - wielka."),
-    ("Wisła", "Wisła", "Nazwy geograficzne - wielka."),
+    ("___isła", "Wisła", "Nazwy geograficzne piszemy wielką literą."),
     ("polska / Polska", "Polska", "Nazwy państw - wielka."),
     ("warszawa / Warszawa", "Warszawa", "Nazwy miast - wielka."),
-    ("Kraków", "Kraków", "Nazwy miast - wielka."),
-    ("Tatry", "Tatry", "Nazwy gór - wielka."),
-    ("Bałtyk", "Bałtyk", "Nazwy mórz - wielka."),
-    ("Europa", "Europa", "Nazwy kontynentów - wielka."),
-    ("Ziemia (planeta)", "Ziemia", "Nazwy planet - wielka."),
-    ("Poznań", "Poznań", "Nazwy miast - wielka."),
+    ("___raków", "Kraków", "Nazwy miast piszemy wielką literą."),
+    ("___atry", "Tatry", "Nazwy gór piszemy wielką literą."),
+    ("___ałtyk", "Bałtyk", "Nazwy mórz piszemy wielką literą."),
+    ("___uropa", "Europa", "Nazwy kontynentów piszemy wielką literą."),
+    ("___iemia (planeta)", "Ziemia", "Nazwy planet piszemy wielką literą."),
+    ("___oznań", "Poznań", "Nazwy miast piszemy wielką literą."),
 ]
 
 for i, (front, back, rule) in enumerate(wielka_data, start=291):

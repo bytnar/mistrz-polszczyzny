@@ -10,9 +10,8 @@ This document provides essential information for AI agents and developers workin
 - `index.html`: Main application entry point.
 - `style.css`: All styles, including dark mode and responsiveness.
 - `script.js`: Application logic, state management, and LocalStorage handling.
-- `data.js`: The generated database of flashcards (do not edit directly).
-- `data_part1.js`: Source data for cards 1-180.
-- `generate_full_data.py`: Python script that merges `data_part1.js` with internal data (cards 181-300) to generate `data.js`.
+- `data.js`: Database of flashcards (400 cards). Edit directly.
+- `generate_full_data.py`: Legacy build script (not used in current workflow).
 
 ---
 
@@ -27,15 +26,11 @@ Since this is a static site, there is no compile step for the application code.
   python3 -m http.server 8000
   ```
 
-### Data Generation (Build Step)
-The `data.js` file is a build artifact. If you need to modify flashcard content:
-1. **Cards 1-180:** Edit `data_part1.js`.
-2. **Cards 181-300:** Edit the lists (e.g., `chh_data`, `nie_data`) in `generate_full_data.py`.
-3. **Regenerate:** Run the Python script:
-   ```bash
-   python3 generate_full_data.py
-   ```
-   *Note: This script reads `data_part1.js`, appends the extra cards, and overwrites `data.js`.*
+### Data Editing
+Edit `data.js` directly — it contains all 400 cards. After editing, verify:
+```bash
+node -e "console.log(require('./data.js').length)"
+```
 
 ### Testing
 - **Manual Testing:** Open the app in a browser (mobile simulation recommended).
@@ -95,18 +90,16 @@ The `data.js` file is a build artifact. If you need to modify flashcard content:
 
 ## 4. Development Workflow
 
-1. **Modify:** Make changes to `script.js`, `style.css`, or `index.html`.
-2. **Data Updates:** If updating content, modify source files (`data_part1.js` or `generate_full_data.py`) and run the generation script.
-3. **Verify:** Open `index.html` to verify changes visually and functionally.
-4. **Commit:** Create concise, descriptive commit messages.
+1. **Modify:** Make changes to `script.js`, `style.css`, `index.html`, or `data.js`.
+2. **Verify:** Open `index.html` to verify changes visually and functionally.
+3. **Commit:** Create concise, descriptive commit messages.
 
 ### Common Tasks
 
 **Adding a new Flashcard:**
-- DO NOT edit `data.js`.
-- If it belongs to an existing category in `generate_full_data.py` (e.g., "Ortografia ch/h"), add it to the list there.
-- If it's a new category or belongs to the first batch, check `data_part1.js`.
-- Run `python3 generate_full_data.py`.
+- Edit `data.js` directly — add the new card with the next available `id`.
+- Verify the word exists via `https://sjp.pwn.pl/so/{word}`.
+- Run validation: `node -e "console.log(require('./data.js').length)"`.
 
 **Changing UI Colors:**
 - Edit the `:root` variables in `style.css`.
@@ -124,4 +117,4 @@ The `data.js` file is a build artifact. If you need to modify flashcard content:
 - **Performance:**
   - Assets are minimal.
   - Fonts are loaded from Google Fonts (Inter).
-  - Ensure `data.js` doesn't grow exponentially; current size (300 cards) is negligible for modern browsers.
+  - Ensure `data.js` doesn't grow exponentially; current size (400 cards) is negligible for modern browsers.
