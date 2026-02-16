@@ -117,29 +117,13 @@ function startAllMode() {
     modeAll.classList.add('active');
     modeErrors.classList.remove('active');
 
-    let restored = false;
-    try {
-        const raw = localStorage.getItem(STATE_KEY);
-        if (raw) {
-            const state = JSON.parse(raw);
-            // We only restore if the saved state is for 'all' mode
-            if (state && state.mode === 'all' && Array.isArray(state.deckIds)) {
-                const idMap = new Map(flashcards.map(c => [c.id, c]));
-                const restoredDeck = state.deckIds.map(id => idMap.get(id)).filter(Boolean);
-                if (restoredDeck.length > 0) {
-                    currentDeck = restoredDeck;
-                    currentIndex = Math.min(state.index || 0, currentDeck.length - 1);
-                    restored = true;
-                }
-            }
-        }
-    } catch (e) { /* ignore */ }
-
-    if (!restored) {
+    // restoreSession is the canonical way to restore state.
+    // If it fails, we start a fresh deck.
+    if (!restoreSession()) {
         currentDeck = shuffle([...flashcards]);
         currentIndex = 0;
+        showCard();
     }
-    showCard();
 }
 
 function startReviewMode() {
