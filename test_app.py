@@ -5,9 +5,11 @@ import os
 import re
 from playwright.async_api import async_playwright, expect
 
+BASE_URL = os.environ.get('BASE_URL', 'file:///Users/marek/workspace/mistrz-polszczyzny/index.html')
+
 async def test_scenario_1_initial_load(page):
     print("\n--- Running Scenario 1: Initial Load ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     await expect(page.locator("#progress")).to_have_text("1 / 415")
     await expect(page.locator("#actions")).to_have_css("opacity", "0")
@@ -16,7 +18,7 @@ async def test_scenario_1_initial_load(page):
 
 async def test_scenario_2_card_flip(page):
     print("\n--- Running Scenario 2: Card Flip ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     flashcard = page.locator("#flashcard")
     actions = page.locator("#actions")
@@ -28,7 +30,7 @@ async def test_scenario_2_card_flip(page):
 
 async def test_scenario_3_umiem_button(page):
     print("\n--- Running Scenario 3: 'Umiem' Button ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     question = page.locator("#card-question")
     initial_question_text = await question.text_content()
@@ -40,7 +42,7 @@ async def test_scenario_3_umiem_button(page):
 
 async def test_scenario_4_powtorze_button(page):
     print("\n--- Running Scenario 4: 'Powtórzę' Button ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     question = page.locator("#card-question")
     initial_question_text = await question.text_content()
@@ -52,7 +54,7 @@ async def test_scenario_4_powtorze_button(page):
 
 async def test_scenario_5_review_mode(page):
     print("\n--- Running Scenario 5: 'Do powtórki' Mode ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     flashcard = page.locator("#flashcard")
     question = page.locator("#card-question")
@@ -89,7 +91,7 @@ async def test_scenario_5_review_mode(page):
 
 async def test_scenario_6_persistence(page):
     print("\n--- Running Scenario 6: State Persistence ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     question = page.locator("#card-question")
     btn_know = page.locator("#btn-know")
@@ -111,7 +113,7 @@ async def test_scenario_6_persistence(page):
 
 async def test_scenario_7_reset_progress(page):
     print("\n--- Running Scenario 7: Reset Progress ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     question = page.locator("#card-question")
     btn_know = page.locator("#btn-know")
@@ -142,7 +144,7 @@ async def test_scenario_7_reset_progress(page):
 
 async def test_scenario_8_mode_switching(page):
     print("\n--- Running Scenario 8: Mode Switching ---")
-    await page.goto("file:///Users/marek/workspace/mistrz-polszczyzny/index.html")
+    await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
     
     flashcard = page.locator("#flashcard")

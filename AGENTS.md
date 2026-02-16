@@ -32,6 +32,13 @@ node -e "console.log(require('./data.js').length)"
 ```
 
 ### Testing
+- **Automated Testing:** Playwright-based tests in `test_app.py`. Run with:
+  ```bash
+  make test        # Run in headless mode (default)
+  make test-visible # Run with visible browser for debugging
+  ```
+  Tests cover: initial load, card flip, button actions, review mode, persistence, reset, and mode switching.
+- **CI/CD:** GitHub Actions workflow in `.github/workflows/headless-tests.yml` runs tests automatically on push/PR to main/master.
 - **Manual Testing:** Open the app in a browser (mobile simulation recommended).
 - **Functional Checks:**
   - Verify card flipping works.

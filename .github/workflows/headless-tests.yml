@@ -1,0 +1,66 @@
+name: Headless Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/test_app.py') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright
+        run: |
+          pip install playwright
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Install Playwright dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: |
+          playwright install-deps chromium
+
+      - name: Start HTTP server
+        run: |
+          python3 -m http.server 8000 &
+          sleep 2
+          curl -I http://localhost:8000/index.html
+
+      - name: Run headless tests
+        env:
+          BASE_URL: http://localhost:8000/index.html
+          HEADLESS: true
+        run: |
+          python test_app.py
+
+      - name: Upload test artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-screenshots
+          path: |
+            *.png
+            test-results/
+          retention-days: 7
