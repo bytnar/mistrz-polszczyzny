@@ -37,9 +37,13 @@ function saveErrors() {
 }
 
 function saveState() {
+    // Only save state for the main "all" deck to avoid overwriting progress
+    // when user enters review mode.
+    if (reviewMode) return;
+
     const state = {
         index: currentIndex,
-        mode: reviewMode ? 'review' : 'all',
+        mode: 'all',
         deckIds: currentDeck.map(c => c.id)
     };
     localStorage.setItem(STATE_KEY, JSON.stringify(state));
@@ -112,8 +116,29 @@ function startAllMode() {
     reviewMode = false;
     modeAll.classList.add('active');
     modeErrors.classList.remove('active');
-    currentDeck = shuffle([...flashcards]);
-    currentIndex = 0;
+
+    let restored = false;
+    try {
+        const raw = localStorage.getItem(STATE_KEY);
+        if (raw) {
+            const state = JSON.parse(raw);
+            // We only restore if the saved state is for 'all' mode
+            if (state && state.mode === 'all' && Array.isArray(state.deckIds)) {
+                const idMap = new Map(flashcards.map(c => [c.id, c]));
+                const restoredDeck = state.deckIds.map(id => idMap.get(id)).filter(Boolean);
+                if (restoredDeck.length > 0) {
+                    currentDeck = restoredDeck;
+                    currentIndex = Math.min(state.index || 0, currentDeck.length - 1);
+                    restored = true;
+                }
+            }
+        }
+    } catch (e) { /* ignore */ }
+
+    if (!restored) {
+        currentDeck = shuffle([...flashcards]);
+        currentIndex = 0;
+    }
     showCard();
 }
 
@@ -212,6 +237,7 @@ btnReset.addEventListener('click', () => {
     errorIds = [];
     saveErrors();
     updateBadge();
+    localStorage.removeItem(STATE_KEY);
     if (reviewMode) startReviewMode(); // will show empty
     else startAllMode();
 });
