@@ -11,7 +11,7 @@ async def test_scenario_1_initial_load(page):
     print("\n--- Running Scenario 1: Initial Load ---")
     await page.goto(BASE_URL)
     await page.wait_for_load_state('networkidle')
-    await expect(page.locator("#progress")).to_have_text("1 / 415")
+    await expect(page.locator("#progress")).to_have_text("1 / 446")
     await expect(page.locator("#actions")).to_have_css("opacity", "0")
     await expect(page.locator("#error-badge")).to_have_text("0")
     print("✅ Scenario 1: Initial Load test passed.")
@@ -37,7 +37,7 @@ async def test_scenario_3_umiem_button(page):
     await page.locator("#flashcard").click()
     await page.locator("#btn-know").click()
     await expect(question).not_to_have_text(initial_question_text)
-    await expect(page.locator("#progress")).to_have_text("2 / 415")
+    await expect(page.locator("#progress")).to_have_text("2 / 446")
     print("✅ Scenario 3: 'Umiem' Button test passed.")
 
 async def test_scenario_4_powtorze_button(page):
@@ -67,11 +67,11 @@ async def test_scenario_5_review_mode(page):
     card_wrapper = page.locator("#card-wrapper")
 
     await flashcard.click(); await btn_dont_know.click()
-    await expect(progress).to_have_text("2 / 415")
+    await expect(progress).to_have_text("2 / 446")
     await flashcard.click(); await btn_know.click()
-    await expect(progress).to_have_text("3 / 415")
+    await expect(progress).to_have_text("3 / 446")
     await flashcard.click(); await btn_dont_know.click()
-    await expect(progress).to_have_text("4 / 415")
+    await expect(progress).to_have_text("4 / 446")
     await expect(error_badge).to_have_text("2")
 
     await mode_errors.click()
@@ -86,7 +86,7 @@ async def test_scenario_5_review_mode(page):
     await expect(card_wrapper).to_contain_text("Brak fiszek do powtórki!")
     
     await mode_all.click()
-    await expect(progress).to_have_text("4 / 415")
+    await expect(progress).to_have_text("4 / 446")
     print("✅ Scenario 5: 'Do powtórki' Mode test passed.")
 
 async def test_scenario_6_persistence(page):
@@ -101,13 +101,13 @@ async def test_scenario_6_persistence(page):
     await page.locator("#flashcard").click()
     await btn_know.click()
     await expect(question).not_to_have_text(first_card_text)
-    await expect(progress).to_have_text("2 / 415")
+    await expect(progress).to_have_text("2 / 446")
     
     question_before_reload = await question.text_content()
     
     await page.reload()
     await page.wait_for_load_state('networkidle')
-    await expect(progress).to_have_text("2 / 415")
+    await expect(progress).to_have_text("2 / 446")
     await expect(question).to_have_text(question_before_reload)
     print("✅ Scenario 6: State Persistence test passed.")
 
@@ -133,7 +133,7 @@ async def test_scenario_7_reset_progress(page):
     page.on("dialog", lambda dialog: dialog.accept())
     await btn_reset.click()
     
-    await expect(progress).to_have_text("1 / 415")
+    await expect(progress).to_have_text("1 / 446")
     await expect(error_badge).to_have_text("0")
     
     state_storage_raw = await page.evaluate("localStorage.getItem('mistrz_state')")
@@ -168,7 +168,7 @@ async def test_scenario_8_mode_switching(page):
     q3 = await question.text_content()
     await flashcard.click(); await btn_know.click()
     await expect(question).not_to_have_text(q3)
-    await expect(progress).to_have_text("4 / 415")
+    await expect(progress).to_have_text("4 / 446")
 
     card_4_text = await question.text_content()
 
@@ -182,7 +182,7 @@ async def test_scenario_8_mode_switching(page):
     await mode_all.click()
     await page.wait_for_load_state('networkidle')
     
-    await expect(progress).to_have_text("4 / 415")
+    await expect(progress).to_have_text("4 / 446")
     await expect(question).to_have_text(card_4_text)
     print("✅ Scenario 8: Mode Switching State test passed.")
 
