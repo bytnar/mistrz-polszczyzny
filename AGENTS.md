@@ -93,6 +93,24 @@ node -e "console.log(require('./data.js').length)"
 
 ---
 
+## 4. Flashcard Data Format
+
+Each card is a JavaScript object:
+
+```javascript
+{ id: 123, category: "Ortografia ó/u", front: "St___ł", back: "Stół", rule: "Ó→O (stół→stołu)." }
+```
+
+### `front` Conventions
+
+- The `___` symbol is used to represent the part of the word to be guessed.
+- Three underscores `___` are used to avoid suggesting the length of the answer (e.g., `__` might imply a 2-letter answer, whereas `___` is of indeterminate length).
+- The `front` should generally include letters that follow the guessed part to provide context.
+- For example, for the word "Wierzyć", where 'rz' is tested, the `front` is `Wie___yć`.
+- The goal is to create a realistic and unambiguous prompt for the user.
+
+---
+
 ## 4. Development Workflow
 
 1. **Modify:** Make changes to `script.js`, `style.css`, `index.html`, or `data.js`.

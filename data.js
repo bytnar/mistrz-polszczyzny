@@ -313,7 +313,7 @@ const flashcards = [
     { id: 312, category: "Ortografia rz/ż", front: "Sztukmi___", back: "Sztukmistrz", rule: "RZ piszemy w zakończeniach wyrazów: -mistrz." },
     { id: 313, category: "Ortografia rz/ż", front: "Wie___chołek", back: "Wierzchołek", rule: "RZ piszemy, gdy wymienia się na R (wierzch→wierchu)." },
     { id: 314, category: "Ortografia rz/ż", front: "Mo___e (akwen)", back: "Morze", rule: "RZ piszemy, gdy wymienia się na R (morski)." },
-    { id: 315, category: "Ortografia rz/ż", front: "Wie___ć", back: "Wierzyć", rule: "RZ piszemy, gdy wymienia się na R (wiara)." },
+    { id: 315, category: "Ortografia rz/ż", front: "Wie___yć", back: "Wierzyć", rule: "RZ piszemy, gdy wymienia się na R (wiara)." },
     { id: 316, category: "Ortografia rz/ż", front: "Podró___nik", back: "Podróżnik", rule: "Ż→G (podróżnik→droga)." },
     { id: 317, category: "Ortografia rz/ż", front: "Stra___nik", back: "Strażnik", rule: "Ż→G (strażnik→straży)." },
     { id: 318, category: "Ortografia rz/ż", front: "Mosię___ny", back: "Mosiężny", rule: "Ż piszemy, gdy wymienia się na dz (mosiądz)." },
